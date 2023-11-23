@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>time</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+    #time {
+      display: flex;
+      background-color: #A1662F;
+      width: 100vw;
+      height: 100vh;
+    }
+    #time > div {
+      border: 1px black solid;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: min(10em, 50vh, 25vw);
+      font-family:Georgia, 'Times New Roman', Times, serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="time">
+    <div id="hr"></div>
+    <div id="min"></div>
+  </div>
+  <script>
+    const hourdiv = document.getElementById("hr");
+    const mindiv = document.getElementById("min");
+    const setDateTime = (date, time) => {
+      hourdiv.innerHTML = time.split(":")[0];
+      mindiv.innerHTML = time.split(":")[1];
+    };
+    const update = () => {
+      const now = new Date();
+      const currentDateTime = now.toLocaleString();
+      const data = currentDateTime.toUpperCase().split(',');
+      setDateTime(data[0], data[1])
+      window.requestAnimationFrame(update);
+    }
+    document.body.addEventListener("click", ()=> {
+      if(!document.fullscreen)
+        document.documentElement.requestFullscreen();
+      else
+        document.exitFullscreen();
+    })
+    update();
+  </script>
+</body>
+</html>
